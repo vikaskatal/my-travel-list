@@ -9,14 +9,14 @@
 	margin-bottom: 15px;
 }
 
-.map-content p{
-	letter-spacing: 5px;
-}
-
 
 #map{
 	height: 70vh;
 	width: 100%;
+}
+
+.list-container{
+	min-height: 100vh;
 }
 
 
@@ -28,13 +28,13 @@
 	.map-content{
 		height: 100%;
 	}
-   .map-content p{
-	    transform: translate(-50%, -50%) rotate(-90deg);
-	    white-space: nowrap;
-	    position: absolute;
-	    left: 50%;
-	    top: 50%;
-	    margin-bottom: 0px;
+	.map-content h2{
+		transform: translate(-50%, -50%) rotate(-90deg);
+		white-space: nowrap;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin-bottom: 0px;
 	}
 	#map {
 		height: calc(100vh - 50px);

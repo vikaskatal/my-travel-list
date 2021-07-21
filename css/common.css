@@ -16,3 +16,19 @@ body {
 	margin-top: 10px;
 }
 
+section{
+	padding: 50px 0;
+}
+
+section:nth-child(even){
+	background-color: #fdfbfb;
+}
+
+.title{
+	text-align: center;
+}
+
+.title p, .title h2 {
+	letter-spacing: 5px;
+	font-size: 1rem;
+}

@@ -11,50 +11,51 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
     
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-	<!-- Custom Css-->
+	  <!-- Custom Css-->
     <link rel="stylesheet" type="text/css" href="./css/common.css" />
     <link rel="stylesheet" type="text/css" href="./css/home.css" />
     <!-- Custom Js-->
     <script src="./js/constants.js"></script>
     <script src="./js/utils.js"></script>
     <script src="./js/index.js"></script>
-
   </head>
   <body>
-
+    <!-- Map Section -->
     <div class="map-container">
-		<div class="row">
-			
-			<div class="col-100 col-md-2 col-xl-1">
-				<div class="map-content position-relative border p-3 mb-3 text-center">
-					<p class="m-0 text-uppercase">Map View</p>
-				</div>
-			</div>
-			<div class="col-100 col-md-10 col-xl-11">
-				<div id="map"></div>
-			</div>
+      <div class="row">
+        <div class="col-100 col-md-2 col-xl-1">
+          <div class="map-content position-relative title border p-3 mb-3 text-center">
+            <h2 class="m-0 text-uppercase">Map View</h2>
+          </div>
+        </div>
+        <div class="col-100 col-md-10 col-xl-11">
+          <div id="map"></div>
+        </div>      
+      </div>
+    </div>
+    <!-- .map-container -->
 
-		</div>
-	</div>
 
-
-	<section>
-		<div class="container">
-			<div id="list"></div>
-		</div>
-	</section>
- 
+    <section class="list-container">
+      <div class="container">
+        <div class="title border p-3 mb-3 text-center">
+          <h2 class="m-0 text-uppercase">List View</h2>
+        </div>
+        <div id="filters" class="d-flex align-itens-center mb-3"></div>
+        <div id="list"></div>
+      </div>
+    </section>
+    <!-- .list-container -->
 
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    
-    
     <!-- My key: AIzaSyAlURNB6KOeID7QojjgzpgwAnGxwQfWwfY -->
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlURNB6KOeID7QojjgzpgwAnGxwQfWwfY&callback=initMap&libraries=&v=weekly"
       async
     ></script>
-
     <!-- Another key: AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg -->
     <!-- <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=&v=weekly"

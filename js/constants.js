@@ -994,8 +994,10 @@ const LocationList = LocationByState.reduce((accumulator, currentValue) => {
 
 }, [])
 
+const StateList = LocationByState.map((ele) => ele.state);
 
-console.log(LocationList)
+// console.log('StateList', StateList)
+// console.log('LocationList', LocationList)
 
 // Refs: https://www.fabhotels.com/blog/places-to-visit-in-south-india/
 // https://www.fabhotels.com/blog/places-to-visit-in-north-india/
