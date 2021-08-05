@@ -1,12 +1,4 @@
-var centerLatLng = {
-    lat: 12.9716,
-    lng: 77.5946,
-};
-
-var mapZoom = 5;
-
-
-let LocationByState = [
+const Locations = [
 	{
         state: 'Karnataka',
         list: [
@@ -18,6 +10,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Gokarna',
@@ -27,6 +20,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Hampi',
@@ -36,6 +30,7 @@ let LocationByState = [
                 statePopularity: 3,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Chikmagalur',
@@ -45,6 +40,7 @@ let LocationByState = [
                 statePopularity: 4,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Bengaluru',
@@ -56,6 +52,7 @@ let LocationByState = [
                 	'Nandi Hills'
                 ],
                 idealTime: '',
+                visited: true,
             },
         ],
     },
@@ -70,6 +67,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: true,
             },
             {
                 title: 'Varkala',
@@ -79,6 +77,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Munnar',
@@ -88,6 +87,7 @@ let LocationByState = [
                 statePopularity: 3,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Alleppey',
@@ -97,6 +97,7 @@ let LocationByState = [
                 statePopularity: 4,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Kumarakom',
@@ -106,6 +107,7 @@ let LocationByState = [
                 statePopularity: 5,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Kochi',
@@ -115,6 +117,7 @@ let LocationByState = [
                 statePopularity: 6,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Thekkady',
@@ -124,6 +127,7 @@ let LocationByState = [
                 statePopularity: 7,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Thiruvananthapuram',
@@ -133,6 +137,7 @@ let LocationByState = [
                 statePopularity: 8,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Thrissur',
@@ -142,6 +147,7 @@ let LocationByState = [
                 statePopularity: 9,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
         ]
     },
@@ -156,6 +162,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Ooty',
@@ -165,6 +172,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Coonoor',
@@ -174,6 +182,7 @@ let LocationByState = [
                 statePopularity: 3,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Chennai',
@@ -183,6 +192,7 @@ let LocationByState = [
                 statePopularity: 4,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Mahabalipuram',
@@ -192,6 +202,7 @@ let LocationByState = [
                 statePopularity: 5,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Tanjore',
@@ -201,6 +212,7 @@ let LocationByState = [
                 statePopularity: 6,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Madurai',
@@ -210,6 +222,7 @@ let LocationByState = [
                 statePopularity: 7,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Kanchipuram',
@@ -219,6 +232,7 @@ let LocationByState = [
                 statePopularity: 8,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Kanyakumari',
@@ -228,6 +242,7 @@ let LocationByState = [
                 statePopularity: 9,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Rameswaram',
@@ -237,6 +252,7 @@ let LocationByState = [
                 statePopularity: 10,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Coimbatore',
@@ -246,6 +262,7 @@ let LocationByState = [
                 statePopularity: 11,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
         ]
     },
@@ -261,6 +278,7 @@ let LocationByState = [
 	            statePopularity: 1,
 	            nearBy: [],
                 idealTime: '',
+                visited: false,
 	        },
 	    ]
     },
@@ -275,6 +293,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Warangal',
@@ -284,6 +303,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
         ]
     },
@@ -298,6 +318,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Araku Valley',
@@ -307,6 +328,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Gandikota Canyon',
@@ -316,6 +338,7 @@ let LocationByState = [
                 statePopularity: 3,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             }
         ]
     },
@@ -330,6 +353,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
         ]
     },
@@ -344,6 +368,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: true,
             },
 
         ]
@@ -376,6 +401,7 @@ let LocationByState = [
 
                 ],
                 idealTime: 'March to May. October to February is a good time to experience snow',
+                visited: false,
             },
             {
                 title: 'Manali',
@@ -387,6 +413,7 @@ let LocationByState = [
                 	'Kufri',
                 ],
                 idealTime: 'March to June. December to February is ideal to experience snow.',
+                visited: true,
             },
             {
                 title: 'Shimla',
@@ -401,6 +428,7 @@ let LocationByState = [
                 	'Parvati Valley'
                 ],
                 idealTime: 'March to June. November to February is ideal for experiencing snowfall.',
+                visited: false,
             },
             {
                 title: 'Kasol',
@@ -414,6 +442,7 @@ let LocationByState = [
                 	'Parvati Valley'
                 ],
                 idealTime: 'April to May and October to November',
+                visited: true,
             },
             {
                 title: 'McLeodganj',
@@ -427,6 +456,7 @@ let LocationByState = [
                 	'Triund',
                 ],
                 idealTime: 'February to June',
+                visited: true,
             },
         ]
     },
@@ -442,6 +472,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
             	title: 'Kashmir Circuit',
@@ -451,6 +482,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             }
         ]
     },
@@ -458,14 +490,25 @@ let LocationByState = [
     	state: 'Ladakh',
     	ut: true,
     	list: [
-    		{
-                title: 'Leh',
-                coordinate:[34.1525864, 77.57705349999999],
+    		// {
+            //     title: 'Leh',
+            //     coordinate:[34.1525864, 77.57705349999999],
+            //     description: '',
+            //     popularity: null,
+            //     statePopularity: 1,
+            //     nearBy: [],
+            //     idealTime: 'March to August. December to February is a good time to enjoy snow',
+            //     visited: false,
+            // },
+            {
+                title: 'Thiksey Monastery',
+                coordinate:[34.05766212929175, 77.66700551534079],
                 description: '',
                 popularity: null,
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'March to August. December to February is a good time to enjoy snow',
+                visited: false,
             },
     	]
     },
@@ -480,6 +523,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Valley of Flowers',
@@ -489,6 +533,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Mussoorie',
@@ -503,6 +548,7 @@ let LocationByState = [
 
                 ],
                 idealTime: 'March to June. December to February is ideal to experience snow.',
+                visited: true,
             },
             {
                 title: 'Jim Corbett',
@@ -515,6 +561,7 @@ let LocationByState = [
                 	'Jim Corbett National Park',
                 ],
                 idealTime: 'November to February',
+                visited: false,
             },
             {
                 title: 'Rishikesh',
@@ -528,6 +575,7 @@ let LocationByState = [
                 	'Mansa Devi Temple',
                 ],
                 idealTime: 'March to June and October to November',
+                visited: true,
             },
             {
                 title: 'Nainital',
@@ -537,6 +585,7 @@ let LocationByState = [
                 statePopularity: 6,
                 nearBy: [],
                 idealTime: 'March to June. Late November to February is a good time to experience snow and winter carnival',
+                visited: false,
             },
             {
                 title: 'Auli',
@@ -546,6 +595,7 @@ let LocationByState = [
                 statePopularity: 7,
                 nearBy: [],
                 idealTime: 'April to June. December to February is ideal for skiing.',
+                visited: false,
             },
         ]
     },
@@ -560,6 +610,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'October to March',
+                visited: false,
             },
             {
                 title: 'Udaipur',
@@ -569,6 +620,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: 'September to March',
+                visited: false,
             },
             {
                 title: 'Jaisalmer',
@@ -578,6 +630,7 @@ let LocationByState = [
                 statePopularity: 3,
                 nearBy: [],
                 idealTime: 'October to March',
+                visited: false,
             },
             {
                 title: 'Pushkar',
@@ -587,6 +640,7 @@ let LocationByState = [
                 statePopularity: 4,
                 nearBy: [],
                 idealTime: 'November to March. October to November is the camel fair',
+                visited: false,
             },
             {
                 title: 'Ranthambore',
@@ -596,6 +650,7 @@ let LocationByState = [
                 statePopularity: 5,
                 nearBy: [],
                 idealTime: 'October to April',
+                visited: false,
             },
         ]
     },
@@ -613,15 +668,7 @@ let LocationByState = [
                 	'Golden Temple'
                 ],
                 idealTime: 'October to March',
-            },
-            {
-                title: 'Chandigarh',
-                coordinate:[],
-                description: '',
-                popularity: null,
-                statePopularity: 1,
-                nearBy: [],
-                idealTime: 'October to March',
+                visited: true,
             },
         ]
     },
@@ -637,6 +684,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'October to March',
+                visited: false,
             },
         ]
     },
@@ -651,24 +699,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
-            },
-            {
-                title: 'Agra',
-                coordinate:[27.1766701, 78.00807449999999],
-                description: '',
-                popularity: null,
-                statePopularity: 1,
-                nearBy: [],
-                idealTime: '',
-            },
-            {
-                title: 'Mathura',
-                coordinate:[27.4924134, 77.673673],
-                description: 'Mathura and Vrindavan',
-                popularity: null,
-                statePopularity: 1,
-                nearBy: [],
-                idealTime: '',
+                visited: false,
             },
         ]
     },
@@ -696,6 +727,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Gorichen Peak,',
@@ -705,6 +737,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: 'April to June and September to October',
+                visited: false,
             },
             {
                 title: 'Roing',
@@ -714,6 +747,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: 'March to June',
+                visited: false,
             },
 
         ]
@@ -729,6 +763,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             
         ]
@@ -744,6 +779,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: '',
+                visited: false,
             },
             {
                 title: 'Goechala',
@@ -753,6 +789,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: 'March to April',
+                visited: false,
             },
             {
                 title: 'Cherrapunji',
@@ -764,6 +801,7 @@ let LocationByState = [
                 	'Mawsynram',
                 ],
                 idealTime: 'March to April',
+                visited: false,
             },
             {
                 title: 'Mawlynnong Village',
@@ -773,6 +811,7 @@ let LocationByState = [
                 statePopularity: 4,
                 nearBy: [],
                 idealTime: 'June to September',
+                visited: false,
             },
             {
                 title: 'Shillong',
@@ -782,6 +821,7 @@ let LocationByState = [
                 statePopularity: 5,
                 nearBy: [],
                 idealTime: 'September to May',
+                visited: false,
             },
             
         ]
@@ -797,6 +837,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'May to October',
+                visited: false,
             },
             {
                 title: 'Tsomgo Lake',
@@ -806,6 +847,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: 'March to May, October to December',
+                visited: false,
             },
             {
                 title: 'Goechala',
@@ -815,6 +857,7 @@ let LocationByState = [
                 statePopularity: 3,
                 nearBy: [],
                 idealTime: 'March to April',
+                visited: false,
             },
             {
                 title: 'Pelling',
@@ -824,6 +867,7 @@ let LocationByState = [
                 statePopularity: 3,
                 nearBy: [],
                 idealTime: 'September to May',
+                visited: false,
             },
             {
                 title: 'Gangtok',
@@ -833,6 +877,7 @@ let LocationByState = [
                 statePopularity: 3,
                 nearBy: [],
                 idealTime: 'September to October and March to June',
+                visited: false,
             },
             
         ]
@@ -848,6 +893,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'September to November',
+                visited: false,
             },
             {
                 title: 'Dibrugarh',
@@ -857,6 +903,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: 'October to March',
+                visited: false,
             },
             {
                 title: 'Guwahati',
@@ -866,6 +913,7 @@ let LocationByState = [
                 statePopularity: 3,
                 nearBy: [],
                 idealTime: 'October to March',
+                visited: false,
             },
 
         ]
@@ -881,6 +929,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'December to March',
+                visited: false,
             },
 
         ]
@@ -896,6 +945,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'October to June',
+                visited: false,
             },
             {
                 title: 'Kohima',
@@ -905,6 +955,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: 'October to May',
+                visited: false,
             },
 
         ]
@@ -920,6 +971,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'September to April',
+                visited: false,
             },
 
         ]
@@ -935,6 +987,7 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'March to May',
+                visited: false,
             },
             {
                 title: 'Lunglei',
@@ -944,6 +997,7 @@ let LocationByState = [
                 statePopularity: 2,
                 nearBy: [],
                 idealTime: 'October to April',
+                visited: false,
             },
 
         ]
@@ -966,40 +1020,9 @@ let LocationByState = [
                 statePopularity: 1,
                 nearBy: [],
                 idealTime: 'October',
+                visited: false,
             },
 
         ]
     },
 ]
-
-
-const LocationList = LocationByState.reduce((accumulator, currentValue) => {
- 	const stateList = currentValue.list;
-
- 	stateList.map(listItem=> {
- 		const newEle = listItem;
- 		newEle.state = currentValue.state;
-
- 		if (currentValue.ut) {
-			newEle.ut = true;
- 		} else {
- 			newEle.ut = false;
- 		}
- 		return newEle
- 	})
-
-
-	let list = [...accumulator, ...stateList];
-	return list
-
-}, [])
-
-const StateList = LocationByState.map((ele) => ele.state);
-
-// console.log('StateList', StateList)
-// console.log('LocationList', LocationList)
-
-// Refs: https://www.fabhotels.com/blog/places-to-visit-in-south-india/
-// https://www.fabhotels.com/blog/places-to-visit-in-north-india/
-// https://www.fabhotels.com/blog/places-to-visit-in-northeast-india/
-// https://www.mistay.in/travel-blog/10-places-in-india-to-travel-to-spend-some-time-with-nature/

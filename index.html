@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Top Destinations</title>
+    <title>Top travel destinations</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,7 +18,8 @@
     <link rel="stylesheet" type="text/css" href="./css/common.css" />
     <link rel="stylesheet" type="text/css" href="./css/home.css" />
     <!-- Custom Js-->
-    <script src="./js/constants.js"></script>
+    <script src="./js/constant/locations.constant.js"></script>
+    <script src="./js/constant/constants.js"></script>
     <script src="./js/utils.js"></script>
     <script src="./js/index.js"></script>
   </head>
@@ -49,6 +50,23 @@
       </div>
     </section>
     <!-- .list-container -->
+
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle"></h5>
+          </div>
+          <div class="modal-body" id="modalBody"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger close-modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <!-- My key: AIzaSyAlURNB6KOeID7QojjgzpgwAnGxwQfWwfY -->

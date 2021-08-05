@@ -1,3 +1,3 @@
 ### Todo
-- Visited/Unvisited
+-  Add Constant like States, Ut, Visited/Unvisited, etc.
 - 

@@ -39,7 +39,7 @@ function buildURL(string){
 
 
 function fancyIconMarker(state) {
-  console.log('fancyIconMarker', state)
+  // console.log('fancyIconMarker', state)
   let marker = '';
 
   switch(state) {

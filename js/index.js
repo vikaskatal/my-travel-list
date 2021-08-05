@@ -1,14 +1,14 @@
-function initMap() {
+function initMap(locations=LocationList, zoom, center) {
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: mapZoom,
-    center: centerLatLng,
+    zoom: zoom || mapZoom,
+    center: center || centerLatLng,
   });
 
 
   const geocoder = new google.maps.Geocoder();
   
   const infoWindow = new google.maps.InfoWindow({
-    content: "<b>vikas</b>",
+    content: "",
     size: new google.maps.Size(150,50),
     maxWidth: 300,
   });
@@ -16,7 +16,7 @@ function initMap() {
   let marker, i, pos;
 
 
-  LocationList.forEach((location, i) => {
+  locations.forEach((location, i) => {
 
     const infoWindowContent = buildInfowindow(location)
 
@@ -73,92 +73,217 @@ function initMap() {
     }
 
   }) //Map list
-
 }
-
-
 
 $(document).ready(function(){
 
   let filteredLocationList = LocationList.slice();
-
-  const filtersEle = $('#filters');
-  let filtersHtml = '';
-
-  const listEle = $('#list');
-  let listHtml = '';
   
+  // Build List UI
   function buildList() {
+    const listEle = $('#list');
+    let listHtml = '';
+
     listEle.empty();
-    listHtml = '';
-    
-    listHtml += '<div class="list-group list-group-numbered">';
+    listHtml += `
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">State</th>
+            </tr>
+          </thead>
+          <tbody>`;
   
-    filteredLocationList.forEach(({title, description, statePopularity, nearBy, state}, i) => {
+      filteredLocationList.forEach(({title, description, statePopularity, nearBy, state}, i) => {
+          listHtml += `
+            <tr class="view-details" data-title="${title}">
+              <th scope="row">${i+1}</th>
+              <td>${title}</td>
+              <td>${state}</td>
+            </tr>
+      `})
+
       listHtml += `
-      <div class="list-group-item">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">${title}</h5>
-          <div>
-            <small>3 days ago</small>
-          </div>
-        </div>
-      `;
+          </tbody>
+        </table>
+      </div>`;
 
-      if(statePopularity) {
-        listHtml += `
-        <small class="f-flex align-items-center mt-2 mb-0">
-          State: 
-          <span class="badge bg-primary rounded-pill">${state}</span>
-          State-vise popularity: 
-          <span class="badge bg-primary rounded-pill">${statePopularity}</span>
-        </small>`;
-      }
-      if(description.length) {
-        listHtml += `<small class="mt-2 mb-0 d-block"><strong>Description: </strong>${description}</small>`;
-      }
-
-      if(nearBy.length) {
-        listHtml += `<p class="mt-2 mb-0"> <strong>Nearby places: </strong>`
-        nearBy.forEach((loc, iLoc)=> {
-          listHtml += `${loc}${(nearBy.length-1) === iLoc ? '' : ', '}`
-        })
-        listHtml += `</p>`
-      }
-
-      listHtml += `</div>`
-    })
-
-    listHtml += '</div>';
-  
     listEle.append(listHtml)
   }
  
+  // Build Filters UI
   function buildFilters() {
-    let selectState = `<div><select class="form-select" id="filterByState">`;
-    selectState += `<option value="">Choose State</option>`;
-    StateList.forEach((ele) => {
-      selectState += `<option value="${ele}">${ele}</option>`
-    })
-    selectState += `</select></div>`
-    filtersHtml += selectState;
+    let filtersHtml = '';
 
-    filtersEle.append(filtersHtml)
-  }
+    let selectState = `<div>
+      <select class="form-select" id="filterByState">
+        <option value="ALL">Choose State</option>`;
   
-  buildFilters();
-  buildList();
+    StateList.forEach((ele) => {
+      selectState += `<option value="${ele}" ${filterObject.state === ele ? 'selected' : ''}>${ele}</option>`
+    })
 
+    selectState += `</select></div>`;
+    
+
+    let isVisited = `
+      <div>
+        <select class="form-select" id="isVisited">
+          <option value="ALL">Choose Visited/Unvisited</option>
+          <option value="true" ${filterObject.visited === true ? 'selected' : ''}>Visited</option>
+          <option value="false" ${filterObject.visited === false ? 'selected' : ''}>Unvisited</option>
+        </select>
+      </div>`; 
+
+    let showMapByFilters = `<div>
+      <button type="button" class="btn btn-outline-primary" id="showMapByFilters">Show Filtered Map</button>
+    </div>`;
+
+
+    filtersHtml += selectState;
+    filtersHtml += isVisited;
+    filtersHtml += showMapByFilters;
+
+    $('#filters').append(filtersHtml)
+  }
+
+
+  // Filter Function
+  function filterFun(key, value) {
+    if(value === 'ALL') {
+      filterObject[key] = 'ALL'
+    } else{
+      if(key === 'visited'){
+        filterObject[key] = value === 'true' || value === true;
+      } else {
+        filterObject[key] = value;
+      }
+    } 
+
+    filteredLocationList = LocationList.slice();
+    filteredLocationList = filteredLocationList.filter((ele) => {
+
+    return (filterObject.state === 'ALL' ? true : (ele.state === filterObject.state)) && 
+           (filterObject.visited === 'ALL' ? true : (ele.visited === filterObject.visited))
+      
+    })
+     
+    buildList();
+  }
+
+  // Run and build Filters in UI
+  buildFilters();
+
+  // On Init filterFun runs buildList() for us
+  filterFun();
+
+  // Filter Action State
   $("#filterByState").on('change', function(){
     let value = this.value;
-    if(value) {
-      filteredLocationList = LocationList.slice();
-      filteredLocationList = filteredLocationList.filter((ele) => ele.state === value )
-    }else {
-      filteredLocationList = LocationList.slice();
-    }
-    buildList()
+    filterFun('state', value);
   });
+
+  // Filter Action Visited/Unvisited
+  $("#isVisited").on('change', function(){
+    let value = this.value;
+    filterFun('visited', value);
+  });
+
+  // Show filtered locations on map
+  $("#showMapByFilters").on('click', function(){
+    window.scrollTo(0, 0);
+    
+    // Temp check for better map zoom option
+    if(filterObject.state !== 'ALL') {
+      let zoom = 8;
+      let center = {
+        lat: filteredLocationList[0].coordinate[0],
+        lng: filteredLocationList[0].coordinate[1],
+      }
+      initMap(filteredLocationList, zoom, center);
+    } else {
+      initMap(filteredLocationList);
+    }
+  });
+
+  // Capture OnClick from list of locations
+  $(document).on("click", '.view-details', function() {
+    const title = $(this).attr('data-title');
+    
+    if(title) {
+      let data = LocationList.find((ele) => ele.title === title)
+      
+      let contentHtml = `
+        <div>
+          ${data.description ? `<p><b>Description:</b> ${data.description}</p>` : ``}
+          
+          <p> <b>Address:</b> ${data.title}, ${data.state} </p>
+          
+          ${data.idealTime ? `<p> <b>Ideal Visit Time:</b> ${data.idealTime}</p>` : ``}`;
+
+  
+      if(data.nearBy.length) {
+        contentHtml += ` <p> <b>Nearby places: </b>`;
+        data.nearBy.forEach((loc, locIndex) => {
+          contentHtml += `<span class="badge rounded-pill bg-primary">${loc}</span> `;
+        })
+        contentHtml += `</p>`;
+      }
+
+      contentHtml += `
+        <p> 
+          <b>Visited:</b> 
+          ${data.visited 
+            ? `<span class="badge rounded-pill bg-success">Yes<span>` 
+            : `<span class="badge rounded-pill bg-danger">Not yet<span>`}
+        </p>
+        <p>
+          <a target="_blank" href="${buildURL(data.address || data.title)}">Google Search</a>
+        </p>`;
+
+        contentHtml += `</div>`;
+
+      buildPopupContent(data, contentHtml)
+    }
+  });
+
+  // Build Popup content(along with title) & open modal
+  function buildPopupContent(data, bodyHtml) {
+    $('#modalTitle').text('')
+    $('#modalTitle').append(data.title);
+     
+    $('#modalBody').html('')
+    $('#modalBody').append(bodyHtml)
+
+    openModal();
+  }
+
+  /*
+   Popup Utils:
+   Use class 'open-modal' in html elements to open modal & 'close-modal' to close
+   openModal() & closeModal(), actual functions doing real work
+  */
+  $('.open-modal').on('click', function(){
+    openModal();
+  })
+  $('.close-modal').on('click', function(){
+    closeModal();
+  })
+
+  function openModal() {
+    $('body').addClass('modal-open');
+    $('#exampleModal').addClass('show').show();
+    $('body').append('<div class="modal-backdrop fade show"></div>');
+  }
+
+  function closeModal() {
+    $('body').removeClass('modal-open');
+    $('#exampleModal').removeClass('show').hide();
+    $('.modal-backdrop').remove();
+  }
 
 })
 
