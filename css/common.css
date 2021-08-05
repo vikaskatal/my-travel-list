@@ -1,3 +1,8 @@
+:root{
+	--dark-bg: #2e2d2d;
+	--dark-color: #cacaca;
+}
+
 body {
   min-height: 100vh;
   min-width: 100vw;
@@ -25,11 +30,23 @@ section:nth-child(even){
 }
 
 .title{
-	text-align: center;
-	background-color: #f1f1f1;
+	padding: 10px;
+	margin-bottom: 15px;
+	border: 1px solid var(--bs-dark);
+	min-height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .title p, .title h2 {
-	letter-spacing: 5px;
+	letter-spacing: 3px;
 	font-size: 1rem;
+}
+
+
+@media only screen and (min-width: 768px) {
+	.title{
+		margin-bottom: 20px;
+	}
 }
